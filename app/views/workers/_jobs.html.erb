@@ -1,16 +1,25 @@
 <% current_worker.jobs.order(id: :desc).where(completed: false).each do |job| %>
-  <div id="job-<%= job.id %>" class="job-panel">
-    <div class="section">
-      <% if job.current_status %>
-        <p class="right">Current Job</p>
-      <% end %>
-      <h3><%= link_to job.title, job_path(job), remote: true%></h3>
-
+<div id="job-<%= job.id %>" class="job-panel">
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title"><%= link_to job.title, job_path(job), remote: true%></span>
+          <% if job.current_status %>
+            <p class="green lighten-4">Current Job</p>
+          <% end %>
+          <p><b>Details: </b><%= job.description %></p>
+          </div>
+          <div class="card-action">
+            <%= link_to 'Mark as Complete', job_path(job, completed: true), method: 'patch', class: 'btn blue', remote: true %>
+            <br>
+            <% if !job.current_status %>
+              <br>
+              <%= link_to 'Set as Current Job', job_path(job, current_status: true), method: 'patch', class: 'btn green', remote: true %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-    <%= link_to 'Mark as Complete', job_path(job, completed: true), method: 'patch', class: 'btn blue', remote: true %>
-    <% if !job.current_status %>
-      <%= link_to 'Set as Current Job', job_path(job, current_status: true), method: 'patch', class: 'btn green', remote: true %>
-    <% end %>
-    <hr>
   </div>
 <% end %>

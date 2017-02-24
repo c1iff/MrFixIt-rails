@@ -1,8 +1,9 @@
-<h1 class="center"><%= current_worker.email %>'s jobs:</h1>
+<h3 class="center thin"><%= current_worker.email %>'s jobs:</h3>
 <div class="worker-margin">
   <div class="row">
     <div class="col s8">
-      <h3 class="center">Pending Jobs</h3>
+      <h5 class="center">Pending Jobs</h5>
+      <br>
       <div class="current-jobs center">
         <%= render 'jobs' %>
       </div>

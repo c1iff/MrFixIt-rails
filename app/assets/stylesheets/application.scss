@@ -92,3 +92,8 @@ body {
   main {
     flex: 1 0 auto;
   }
+
+  nav ul{
+    transform: translateX(32%);
+    webkit-transform: translateX(-32%);
+  }

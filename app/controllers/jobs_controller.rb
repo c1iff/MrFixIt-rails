@@ -1,6 +1,7 @@
 class JobsController < ApplicationController
   respond_to :html, :js
 
+
   def index
     @jobs = Job.all
   end
@@ -15,6 +16,7 @@ class JobsController < ApplicationController
   end
 
   def create
+
     @job = Job.new(job_params)
     if @job.save
       redirect_to jobs_path
