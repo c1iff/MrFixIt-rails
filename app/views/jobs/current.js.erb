@@ -1,1 +1,3 @@
-$(".job_<%= @job.id %> h4").remove().after('<h4>Current Job</h4>')
+$(".job-checkbox").prop('checked', false)
+$(".job_<%= @job.id %> h4").remove()
+$(".job_<%= @job.id %>").after('<h4>Current Job</h4>')

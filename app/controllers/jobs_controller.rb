@@ -24,36 +24,39 @@ class JobsController < ApplicationController
 
   def update
     @job = Job.find(params[:id])
-    if current_worker
-      job = params[:job]
-      if job[:current_status] == "1"
-        Job.set_current_job(@job.id, current_worker.id)
-        respond_to do |format|
-          format.html {redirect_to worker_path(current_worker)}
-          format.js {render 'current'}
-        end
-      elsif job[:current_status] == "0"
-        respond_to do |format|
-          format.html {redirect_to worker_path(current_worker)}
-          format.js {render 'not_current'}
-        end
-      else
-        if @job.update(pending: true, worker_id: current_worker.id)
-          respond_to do |format|
-            format.html {redirect_to worker_path(current_worker)}
-            format.js {render 'create'}
-            flash[:notice] = "You've successfully claimed this job."
-          end
-        else
-          render :show
-          flash[:notice] = "Something went wrong!"
-        end
-      end
-    else
-      # We need to streamline this process better in the future! - Mr. Fix-It.
-      flash[:notice] = 'You must have a worker account to claim a job. Register for one using the link in the navbar above.'
-      redirect_to job_path(@job)
-    end
+    
+
+    # if current_worker
+    #   job = params[:job]
+    #   if job && job[:current_status] == "1"
+    #     Job.set_current_job(@job.id, current_worker.id)
+    #     respond_to do |format|
+    #       format.html {redirect_to worker_path(current_worker)}
+    #       format.js {render 'current'}
+    #     end
+    #   elsif job && job[:current_status] == "0"
+    #     job.update(current_status: false)
+    #     respond_to do |format|
+    #       format.html {redirect_to worker_path(current_worker)}
+    #       format.js {render 'not_current'}
+    #     end
+    #   else
+    #     if @job.update(pending: true, worker_id: current_worker.id)
+    #       respond_to do |format|
+    #         format.html {redirect_to worker_path(current_worker)}
+    #         format.js {render 'create'}
+    #         flash[:notice] = "You've successfully claimed this job."
+    #       end
+    #     else
+    #       render :show
+    #       flash[:notice] = "Something went wrong!"
+    #     end
+    #   end
+    # else
+    #   # We need to streamline this process better in the future! - Mr. Fix-It.
+    #   flash[:notice] = 'You must have a worker account to claim a job. Register for one using the link in the navbar above.'
+    #   redirect_to job_path(@job)
+    # end
   end
 
 private

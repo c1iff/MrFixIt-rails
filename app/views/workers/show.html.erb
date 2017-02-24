@@ -2,14 +2,15 @@
 
 
 <div class="current-jobs">
-  <ul>
+
     <% current_worker.jobs.each do |job| %>
+      <h3><%= job.title  %></h3>
+      <%= link_to "View Details", job_path(job), class: "job_#{job.id} btn"%>
       <%= form_for job, remote: true do |f| %>
-        <%= f.check_box :current_status %>
+        <%= f.check_box :current_status, class: 'job-checkbox' %>
         <%= f.submit "Update" %>
-        <li><%= link_to job.title, job_path(job), class: "job_#{job.id} "%></li>
+        <%= link_to 'Mark as Complerte', job_path(job), method: 'patch', class: 'btn' %>
         <hr>
       <% end %>
     <% end %>
-  </ul>
 </div>
