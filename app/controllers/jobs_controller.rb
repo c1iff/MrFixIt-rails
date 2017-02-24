@@ -26,7 +26,6 @@ class JobsController < ApplicationController
   def update
     @job = Job.find(params[:id])
     respond_to do |format|
-      binding.pry
       if params[:pending]
         @job.update(pending: true, worker_id: current_worker.id)
         format.html { redirect_to worker_path(current_worker), notice: "You've successfully claimed this job." }

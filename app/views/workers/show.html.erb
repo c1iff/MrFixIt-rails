@@ -1,22 +1,33 @@
-<h1><%= current_worker.email %>'s claimed jobs:</h1>
+<h1 class="center"><%= current_worker.email %>'s claimed jobs:</h1>
 
 <div class="row">
-  <div class="current-jobs col s6">
-    <% current_worker.jobs.each do |job| %>
-    <h3><%= job.title  %></h3>
-    <%= link_to "View Details", job_path(job), class: "btn red", remote: true%>
-    <%= link_to 'Mark as Complerte', job_path(job, completed: true), method: 'patch', class: 'btn blue', remote: true %>
-    <%= link_to 'Set as Current Job', job_path(job, current_status: true), method: 'patch', class: 'btn green', remote: true %>
-    <hr>
-    <% end %>
+  <div class="col s6">
+    <h3 class="center">Pending Jobs</h3>
+    <div class="current-jobs">
+      <%= render 'jobs' %>
+    </div>
+
   </div>
 
-  <div class="completed-jobs col s6">
-    <% current_worker.jobs.each do |job| %>
-    <h3><%= job.title  %></h3>
+  <div class="col s3">
+    <h3 class="center">Completed Jobs</h3>
+    <div class="completed-jobs">
+      <% current_worker.jobs.where(completed: true).each do |job| %>
+      <h3><%= job.title  %></h3>
+      <%= link_to "View Details", job_path(job), class: "btn red"%>
+      <hr>
+      <% end %>
+    </div>
+  </div>
 
-    <%= link_to "View Details", job_path(job), class: "btn red"%>
-    <hr>
-    <% end %>
+  <div class="col s3">
+    <h3 class="center">Available Jobs</h3>
+    <div class="available-jobs">
+      <% Job.all.where(pending: false).each do |job| %>
+      <h3><%= job.title  %></h3>
+      <%= link_to "View Details", job_path(job), class: "btn red"%>
+      <hr>
+      <% end %>
+    </div>
   </div>
 </div>
