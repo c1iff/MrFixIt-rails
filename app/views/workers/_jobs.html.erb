@@ -1,12 +1,12 @@
-<% current_worker.jobs.order(id: :desc).each do |job| %>
+<% current_worker.jobs.order(id: :desc).where(completed: false).each do |job| %>
   <div id="job-<%= job.id %>" class="job-panel">
     <div class="section">
       <% if job.current_status %>
         <p class="right">This is your current job</p>
       <% end %>
-      <h3><%= job.title  %></h3>
+      <h3><%= link_to job.title, job_path(job), remote: true%></h3>
+
     </div>
-    <%= link_to "View Details", job_path(job), class: "btn red", remote: true%>
     <%= link_to 'Mark as Complete', job_path(job, completed: true), method: 'patch', class: 'btn blue', remote: true %>
     <% if !job.current_status %>
       <%= link_to 'Set as Current Job', job_path(job, current_status: true), method: 'patch', class: 'btn green', remote: true %>

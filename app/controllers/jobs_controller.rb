@@ -33,7 +33,7 @@ class JobsController < ApplicationController
       elsif params[:current_status]
         Job.set_current_job(@job.id, current_worker.id)
         format.js { render 'current' }
-      elsif parmas[:completed]
+      elsif params[:completed]
         @job.update(completed: true)
         format.js { render 'complete' }
       end

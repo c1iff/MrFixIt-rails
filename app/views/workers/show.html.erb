@@ -13,9 +13,7 @@
     <h3 class="center">Completed Jobs</h3>
     <div class="completed-jobs">
       <% current_worker.jobs.where(completed: true).each do |job| %>
-      <h3><%= job.title  %></h3>
-      <%= link_to "View Details", job_path(job), class: "btn red"%>
-      <hr>
+      <h3><%= link_to job.title, job_path(job)%></h3>
       <% end %>
     </div>
   </div>
@@ -24,9 +22,7 @@
     <h3 class="center">Available Jobs</h3>
     <div class="available-jobs">
       <% Job.all.where(pending: false).each do |job| %>
-      <h3><%= job.title  %></h3>
-      <%= link_to "View Details", job_path(job), class: "btn red"%>
-      <hr>
+        <h3><%= link_to job.title, job_path(job)%></h3>
       <% end %>
     </div>
   </div>

@@ -1,0 +1,2 @@
+$("#job-<%= @job.id %>").remove()
+$(".completed-jobs").append('<h3><%= link_to @job.title, job_path(@job)%></h3>')
