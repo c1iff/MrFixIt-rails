@@ -1,7 +1,15 @@
 <h1><%= current_worker.email %>'s claimed jobs:</h1>
 
-<ul>
-<% current_worker.jobs.each do |job| %>
-<li><%= link_to job.title, job_path(job) %></li>
-<% end %>
-</ul>
+
+<div class="current-jobs">
+  <ul>
+    <% current_worker.jobs.each do |job| %>
+      <%= form_for job, remote: true do |f| %>
+        <%= f.check_box :current_status %>
+        <%= f.submit "Update" %>
+        <li><%= link_to job.title, job_path(job), class: "job_#{job.id} "%></li>
+        <hr>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
