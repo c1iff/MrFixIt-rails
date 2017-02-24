@@ -1,29 +1,35 @@
-<h1 class="center"><%= current_worker.email %>'s claimed jobs:</h1>
+<h1 class="center"><%= current_worker.email %>'s jobs:</h1>
+<div class="worker-margin">
+  <div class="row">
+    <div class="col s8">
+      <h3 class="center">Pending Jobs</h3>
+      <div class="current-jobs center">
+        <%= render 'jobs' %>
+      </div>
 
-<div class="row">
-  <div class="col s6">
-    <h3 class="center">Pending Jobs</h3>
-    <div class="current-jobs">
-      <%= render 'jobs' %>
     </div>
 
-  </div>
+    <div class="col s2">
+      <h5 class="center">Completed Jobs</h5>
+      <div class="completed-jobs">
+        <div class="collection">
+          <% current_worker.jobs.where(completed: true).each do |job| %>
+          <%= link_to job.title, job_path(job), class: 'collection-item', style: 'text-decoration: line-through;'%>
+          <% end %>
+        </div>
+      </div>
+    </div>
 
-  <div class="col s3">
-    <h3 class="center">Completed Jobs</h3>
-    <div class="completed-jobs">
-      <% current_worker.jobs.where(completed: true).each do |job| %>
-      <h3><%= link_to job.title, job_path(job)%></h3>
-      <% end %>
+    <div class="col s2">
+      <h5 class="center">Available Jobs</h5><br>
+      <div class="available-jobs">
+        <div class="collection">
+          <% Job.all.where(pending: false).each do |job| %>
+          <%= link_to job.title, job_path(job), class: 'collection-item'%>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="col s3">
-    <h3 class="center">Available Jobs</h3>
-    <div class="available-jobs">
-      <% Job.all.where(pending: false).each do |job| %>
-        <h3><%= link_to job.title, job_path(job)%></h3>
-      <% end %>
-    </div>
-  </div>
 </div>

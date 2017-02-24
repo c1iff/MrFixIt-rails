@@ -1,5 +1,6 @@
 class Job < ActiveRecord::Base
   validates :title, :presence => true
+  belongs_to :worker
 
   def self.set_current_job(job_id, worker_id)
     jobs = Job.where(worker_id: worker_id)
