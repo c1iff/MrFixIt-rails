@@ -8,36 +8,81 @@
   </head>
   <body>
     <div class="header">
-      <h1 class="page-title">Mr. Fix-It</h1>
-      <h2>Crowd-sourced repairs!</h2>
+      <h1 class="page-title thin float">Mr. Fix-It</h1>
+      <h2 class="thin">Crowd-sourced repairs!</h2>
+      <% if worker_signed_in? %>
+      <p class="white-text center" id="user-info"><em>You're signed into your <%= current_worker.email %> <b>worker account</b></em></p>
+      <% end %>
+      <% if user_signed_in? %>
+      <p class="login-notice"><em>You're signed in as <%= current_user.email %></em></p>
+      <% end %>
     </div>
-    <div class="navigation-menu">
-      <ul>
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "See All Jobs", jobs_path %></li>
-        <li><%= link_to "Add Your Job", new_job_path %></li>
-        <% if worker_signed_in? %>
-          <p class="login-notice"><em>You're signed into your <%= current_worker.email %> <b>worker account</b></em></p>
-          <li><%= link_to "Worker Dashboard", worker_path(current_worker) %></li>
-          <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
-        <% elsif user_signed_in? %>
-          <p class="login-notice"><em>You're signed in as <%= current_user.email %></em></p>
-          <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
-          <li><%= link_to "Register as a Worker", new_worker_path %></li>
-        <% else %>
-        <li><%= link_to "Register as a Worker", new_worker_path %></li>
-        <li><%= link_to "Register to Post Jobs", new_user_registration_path %></li>
-        <li><%= link_to "Log In as User", new_user_session_path %></li>
-        <li><%= link_to "Log In as Worker", new_worker_session_path %></li>
-        <% end %>
-      </ul>
-    </div>
-    <div class="content">
+
+      <nav>
+        <div class="nav-wrapper">
+          <div class="center">
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+              <li><%= link_to "Home", root_path %></li>
+              <li><%= link_to "See All Jobs", jobs_path %></li>
+              <li><%= link_to "Add Your Job", new_job_path %></li>
+              <% if worker_signed_in? %>
+
+              <li><%= link_to "Worker Dashboard", worker_path(current_worker) %></li>
+              <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
+              <% elsif user_signed_in? %>
+
+              <li><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
+              <li><%= link_to "Register as a Worker", new_worker_path %></li>
+              <% else %>
+              <li><%= link_to "Register as a Worker", new_worker_path %></li>
+              <li><%= link_to "Register to Post Jobs", new_user_registration_path %></li>
+              <li><%= link_to "Log In as User", new_user_session_path %></li>
+              <li><%= link_to "Log In as Worker", new_worker_session_path %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+
+<main>
+
+  <div class="content">
     <div class="flash-messages">
       <%= flash[:alert] %>
       <h3><%= flash[:notice] %></h3>
-      </div>
-      <%= yield %>
     </div>
+    <div class="container">
+      <%= yield %>
+</main>
+
+
+
+    </div>
+    </div>
+    <footer class="page-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Mr. Fix-It</h5>
+            <p class="grey-text text-lighten-4">555 NW 5th St</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Contact</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#!">Email</a></li>
+              <li><a class="grey-text text-lighten-3" href="#!">555-555-0211</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright black">
+        <div class="container">
+        © 2017 Mr. Fix-It
+        <a class="grey-text text-lighten-4 right" href="#!">Twitter</a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

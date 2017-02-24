@@ -15,3 +15,11 @@
 //= require turbolinks
 //= require_tree .
 //= require materialize-sprockets
+
+
+var ready = function() {
+  $('.parallax').parallax();
+  $('.materialboxed').materialbox();
+}
+$(document).on('turbolinks:load', ready)
+$(document).ready(ready)

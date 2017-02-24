@@ -1,9 +1,14 @@
-<h1>Post your Job</h1>
+<h2 class="center">Post your Job</h2>
+<div class="row">
+  <div class="col s3"></div>
+    <div class="col s6">
+      <%= form_for @job do |f| %>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'materialize-textarea' %>
+      <%= f.submit class: 'btn'%>
+      <% end %>
 
-<%= form_for @job do |f| %>
-  <%= f.label :title %>
-<%= f.text_field :title %>
-  <%= f.label :description %>
-  <%= f.text_field :description %>
-  <%= f.submit  %>
-<% end %>
+  </div>
+</div>

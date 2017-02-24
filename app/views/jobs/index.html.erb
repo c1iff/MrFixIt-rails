@@ -1,7 +1,8 @@
-<h1>Jobs</h1>
+<h1 class="thin">Current Jobs</h1>
 
-<ul>
-  <% @jobs.each do |job| %>
-  <li><%= link_to job.title, job_path(job) %></li>
+
+<div class="collection">
+  <% @jobs.where(completed: false).each do |job| %>
+    <%= link_to job.title, job_path(job), class: 'collection-item' %>
   <% end %>
-</ul>
+</div>

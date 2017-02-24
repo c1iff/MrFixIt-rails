@@ -6,9 +6,15 @@
   <p>Someone has already claimed this job; it's currently pending.</p>
 <% else %>
 <div id='claim-job'>
-  <p>No one has claimed this job!</p>
+  <% if current_worker %>
+    <p>No one has claimed this job!</p>
+  <% end %>
   <% if current_worker %>
     <%= link_to "click here to claim it now", job_path(@job, pending: true), method: 'patch', remote: true  %>
+  <% elsif current_user %>
+    <p>
+      You must be registered as a worker to claim jobs.
+    </p>
   <% end %>
 </div>
 <% end %>
