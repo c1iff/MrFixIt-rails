@@ -1,16 +1,22 @@
 <h1><%= current_worker.email %>'s claimed jobs:</h1>
 
-
-<div class="current-jobs">
-
+<div class="row">
+  <div class="current-jobs col s6">
     <% current_worker.jobs.each do |job| %>
-      <h3><%= job.title  %></h3>
-      <%= link_to "View Details", job_path(job), class: "job_#{job.id} btn"%>
-      <%= form_for job, remote: true do |f| %>
-        <%= f.check_box :current_status, class: 'job-checkbox' %>
-        <%= f.submit "Update" %>
-        <%= link_to 'Mark as Complerte', job_path(job), method: 'patch', class: 'btn' %>
-        <hr>
-      <% end %>
+    <h3><%= job.title  %></h3>
+    <%= link_to "View Details", job_path(job), class: "btn red", remote: true%>
+    <%= link_to 'Mark as Complerte', job_path(job, completed: true), method: 'patch', class: 'btn blue', remote: true %>
+    <%= link_to 'Set as Current Job', job_path(job, current_status: true), method: 'patch', class: 'btn green', remote: true %>
+    <hr>
     <% end %>
+  </div>
+
+  <div class="completed-jobs col s6">
+    <% current_worker.jobs.each do |job| %>
+    <h3><%= job.title  %></h3>
+
+    <%= link_to "View Details", job_path(job), class: "btn red"%>
+    <hr>
+    <% end %>
+  </div>
 </div>

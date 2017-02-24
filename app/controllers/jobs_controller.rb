@@ -1,4 +1,5 @@
 class JobsController < ApplicationController
+  respond_to :html, :js
 
   def index
     @jobs = Job.all
@@ -24,7 +25,24 @@ class JobsController < ApplicationController
 
   def update
     @job = Job.find(params[:id])
-    
+    respond_to do |format|
+      binding.pry
+      if params[:pending]
+        @job.update(pending: true, worker_id: current_worker.id)
+        format.html { redirect_to worker_path(current_worker), notice: "You've successfully claimed this job." }
+        format.js { render 'create'}
+      elsif params[:current_status]
+        Job.set_current_job(@job.id, current_worker.id)
+        format.js { render 'current' }
+      elsif parmas[:completed]
+        @job.update(completed: true)
+        format.js { render 'complete' }
+      end
+    end
+  end
+
+    # if params[:pending]
+    #   @job.update(pending: true, worker_id: current_worker.id)
 
     # if current_worker
     #   job = params[:job]
@@ -57,12 +75,11 @@ class JobsController < ApplicationController
     #   flash[:notice] = 'You must have a worker account to claim a job. Register for one using the link in the navbar above.'
     #   redirect_to job_path(@job)
     # end
-  end
 
 private
 
   def job_params
-    params.require(:job).permit(:title, :description)
+    params.require(:job).permit(:title, :description, :pending, :current_status, :completed)
   end
 
 end

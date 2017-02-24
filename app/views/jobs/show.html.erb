@@ -8,7 +8,7 @@
 <div id='claim-job'>
   <p>No one has claimed this job!</p>
   <% if current_worker %>
-    <%= link_to "click here to claim it now", job_path(@job), method: 'patch', remote: true  %>
+    <%= link_to "click here to claim it now", job_path(@job, pending: true), method: 'patch', remote: true  %>
   <% end %>
 </div>
 <% end %>
