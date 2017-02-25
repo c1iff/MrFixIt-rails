@@ -1,2 +1,2 @@
 $("#job-<%= @job.id %>").remove()
-$("#completed-jobs").append("<%= link_to @job.title, job_path(@job), class: 'collection-item', style: 'text-decoration: line-through;'%>")
+$("#completed-jobs").append("<a href='<%=  job_path(@job)%>' class='collection-item'><%= @job.title %></a>")
