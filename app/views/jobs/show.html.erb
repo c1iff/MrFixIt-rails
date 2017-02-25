@@ -1,20 +1,26 @@
-<h1> <%= @job.title %> </h1>
+<h1 class="center thin"> <%= @job.title %> </h1>
 
-<h3><%= @job.description %></h3>
+<h5 class="center" >Description: <%= @job.description %></h5>
 
 <% if @job.pending %>
-  <p>Someone has already claimed this job; it's currently pending.</p>
+  <p class="center">Someone has already claimed this job; it's currently pending.</p>
 <% else %>
-<div id='claim-job'>
+<div id='claim-job' class="center">
   <% if current_worker %>
-    <p>No one has claimed this job!</p>
+    <p class="center">No one has claimed this job!</p>
   <% end %>
   <% if current_worker %>
-    <%= link_to "click here to claim it now", job_path(@job, pending: true), method: 'patch', remote: true  %>
+    <%= link_to "click here to claim it now", job_path(@job, pending: true), method: 'patch', remote: true, class: 'btn center'  %>
   <% elsif current_user %>
-    <p>
+    <p class="center">
       You must be registered as a worker to claim jobs.
     </p>
   <% end %>
 </div>
 <% end %>
+<div class="section">
+  <br>
+  <br>
+  <br>
+  <br>
+</div>

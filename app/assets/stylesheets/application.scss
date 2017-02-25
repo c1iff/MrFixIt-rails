@@ -70,9 +70,6 @@ body {
   padding: 5px;
 }
 
-nav {
-  align-items: center;
-}
 
 .negative-margin {
   margin-left: -25%;
@@ -84,16 +81,16 @@ nav {
 }
 
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
-  main {
-    flex: 1 0 auto;
-  }
+main {
+  flex: 1 0 auto;
+}
 
-  nav ul{
-    transform: translateX(32%);
-    webkit-transform: translateX(-32%);
-  }
+nav ul{
+  transform: translateX(32%);
+  webkit-transform: translateX(-32%);
+}
