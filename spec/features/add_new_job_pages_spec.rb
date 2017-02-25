@@ -15,6 +15,4 @@ describe "the add a job process" do
     click_on 'Create Job'
     expect(page).to have_content "This is a test job."
   end
-
-
 end

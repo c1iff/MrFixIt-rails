@@ -12,8 +12,8 @@
 
     <div class="col s2">
       <h5 class="center">Completed Jobs</h5>
-      <div class="completed-jobs">
-        <div class="collection">
+      <div >
+        <div class="collection" id="completed-jobs">
           <% current_worker.jobs.where(completed: true).each do |job| %>
           <%= link_to job.title, job_path(job), class: 'collection-item', style: 'text-decoration: line-through;'%>
           <% end %>

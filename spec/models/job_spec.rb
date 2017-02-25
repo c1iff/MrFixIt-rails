@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Job do
   it { should belong_to :worker }
+  it { should validate_presence_of :title}
 end
 
 describe('set_current_job') do
